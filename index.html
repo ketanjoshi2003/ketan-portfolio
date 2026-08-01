@@ -356,6 +356,61 @@ footer{border-top:1px solid var(--line);padding:36px}
   .reveal{opacity:1;transform:none;transition:none}
   *{scroll-behavior:auto}
 }
+
+/* ===== DYNAMIC PROJECT CARDS ===== */
+.proj-meta{
+  display:flex;flex-wrap:wrap;gap:0 20px;align-items:center;
+  margin-bottom:16px;font-family:var(--mono);font-size:12px;
+  color:var(--mute);letter-spacing:0.02em;
+}
+.proj-meta .lang-dot{
+  display:inline-block;width:9px;height:9px;border-radius:50%;
+  margin-right:7px;vertical-align:middle;background:var(--mute);
+}
+.proj-meta .stars{display:inline-flex;align-items:center;gap:5px}
+.proj-meta .stars svg{width:13px;height:13px;stroke:var(--accent-2);fill:var(--accent-2);stroke-width:1}
+.proj-meta .updated{margin-left:auto;color:var(--mute)}
+.proj-topics{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.proj-topics .tp{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:0.04em;
+  padding:3px 9px;border-radius:100px;background:var(--accent-soft);
+  color:var(--accent);text-transform:lowercase;
+}
+.proj-card-link{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:12.5px;color:var(--ink);
+  border-bottom:1px solid var(--line);padding-bottom:3px;
+  transition:color .2s,border-color .2s;
+}
+.proj-card-link:hover{color:var(--accent);border-color:var(--accent)}
+.proj-card-link svg{width:13px;height:13px}
+.proj-desc-empty{font-size:15px;color:var(--mute);font-style:italic;font-family:var(--serif)}
+
+/* loading skeleton */
+.proj-loading{
+  padding:48px 0;text-align:center;
+  font-family:var(--mono);font-size:12px;color:var(--mute);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+.proj-loading::after{
+  content:'';display:inline-block;width:10px;height:10px;
+  margin-left:10px;border:1px solid var(--mute);border-top-color:transparent;
+  border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.proj-error{
+  padding:48px 0;text-align:center;
+  font-size:15px;color:var(--dim);font-family:var(--serif);font-style:italic;
+}
+.proj-error a{color:var(--accent);border-bottom:1px solid var(--accent)}
+.proj-count{
+  font-family:var(--mono);font-size:11px;color:var(--mute);
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:40px;padding-bottom:18px;border-bottom:1px solid var(--line-soft);
+}
+@media(max-width:860px){
+  .proj-meta .updated{margin-left:0}
+}
 </style>
 </head>
 <body>
@@ -534,7 +589,7 @@ footer{border-top:1px solid var(--line);padding:36px}
   </div>
 </section>
 
-<!-- PROJECTS / WORK -->
+<!-- PROJECTS / WORK (dynamic) -->
 <section id="work">
   <div class="section-inner">
     <div class="s-head reveal">
@@ -542,66 +597,9 @@ footer{border-top:1px solid var(--line);padding:36px}
       <h2 class="s-title">Selected <em>work.</em></h2>
       <div class="s-mark">Projects</div>
     </div>
-    <div class="proj-list">
-
-      <article class="proj reveal">
-        <div class="proj-num">— 01</div>
-        <div class="proj-head">
-          <h3><em>PromptOps</em></h3>
-          <div class="proj-stack"><span class="lbl">Stack —</span> React 19 · Python / FastAPI · PostgreSQL</div>
-        </div>
-        <div>
-          <p class="proj-desc">Open-source visual prompt compiler that turns developer requirements into structured, framework-specific prompts for AI coding editors — Cursor, Claude Dev, Antigravity — cutting prompt-iteration time during MVP builds.</p>
-          <ul class="proj-points">
-            <li>Built a <b>Python prompt engine</b> mapping tech stacks and AI control modes into structured markdown with framework-specific coding standards.</li>
-            <li>Integrated <b>multi-model LLM orchestration</b> across Gemini, OpenAI and Groq via async FastAPI endpoints, with automatic provider fallback.</li>
-            <li>Secure React 19 frontend with <b>Google OAuth2, JWT auth</b> and a credit-based usage model on PostgreSQL.</li>
-            <li>Production-hardened API: rate limiting, security headers, isolated API keys — deployed on Vercel + Render.</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://github.com/ketanjoshi2003/PromptOps" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a>
-            <a href="https://promptopsai.vercel.app" target="_blank" rel="noopener">Live <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <article class="proj reveal">
-        <div class="proj-num">— 02</div>
-        <div class="proj-head">
-          <h3><em>DRR</em> — Digital Reading Room</h3>
-          <div class="proj-stack"><span class="lbl">Stack —</span> React 19 · Node.js / Express · MongoDB</div>
-        </div>
-        <div>
-          <p class="proj-desc">Role-based academic document management platform — Admin, Teacher, Reader — with in-app viewing, OCR and multi-layer access control.</p>
-          <ul class="proj-points">
-            <li><b>JWT auth, bcrypt hashing, RBAC middleware</b> across 10 REST endpoints, with real-time session tracking via MongoDB aggregation.</li>
-            <li>OCR text extraction with <b>Tesseract.js</b> for searchable document content.</li>
-            <li><b>6-layer access control</b> — watermarking, IP whitelisting, time-limited access — plus automated email engagement and bulk CSV onboarding.</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://github.com/ketanjoshi2003/DRR" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <article class="proj reveal">
-        <div class="proj-num">— 03</div>
-        <div class="proj-head">
-          <h3><em>Synapse</em></h3>
-          <div class="proj-stack"><span class="lbl">Stack —</span> JavaScript · Chrome Extension · WebSocket · Node.js</div>
-        </div>
-        <div>
-          <p class="proj-desc">Chrome extension paired with a local WebSocket server that reads AI-generated code blocks straight from chat tabs — Claude, ChatGPT, Gemini, Copilot — and writes them into the local project automatically.</p>
-          <ul class="proj-points">
-            <li>Designed a <b>four-method filename-detection chain</b> — code-fence attributes, inline comments, DOM labels, file-tree matching — to route generated code to the correct file.</li>
-            <li>Added Search/Replace and Smart-Patch write modes with optional <b>git auto-backup</b> and a dry-run preview.</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://github.com/ketanjoshi2003/synapse" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a>
-          </div>
-        </div>
-      </article>
-
+    <div id="proj-count" class="proj-count reveal" hidden></div>
+    <div id="proj-list" class="proj-list">
+      <div class="proj-loading" id="proj-loading">Fetching from GitHub</div>
     </div>
   </div>
 </section>
@@ -680,6 +678,140 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 document.querySelectorAll('.nav-links a').forEach(a=>{
   a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open'));
 });
+
+/* ===== DYNAMIC GITHUB PROJECTS ===== */
+(function(){
+  const GH_USER = 'ketanjoshi2003';
+  const SELF_REPO = 'ketan-portfolio';        // exclude the portfolio itself
+  const CACHE_KEY = 'gh_repos_v1';
+  const CACHE_TTL = 1000 * 60 * 60;            // 1 hour
+  const LANG_COLORS = {
+    Python:'#3572A5',JavaScript:'#f1e05a',TypeScript:'#3178c6',
+    PHP:'#4F5D95',HTML:'#e34c26',CSS:'#563d7c',Java:'#b07219',
+    C:'#555555','C++':'f34b7d',Go:'#00ADD8',Rust:'#dea584',
+    Shell:'#89e051',Vue:'#41b883',Dart:'#00B4AB',Kotlin:'#A97BFF',
+    Ruby:'#701516',Jupyter:'#DA5B0B'
+  };
+  const $list   = document.getElementById('proj-list');
+  const $count  = document.getElementById('proj-count');
+
+  function langColor(l){ return LANG_COLORS[l] || '#8f8775'; }
+
+  function timeAgo(iso){
+    const d = new Date(iso); const now = new Date();
+    const days = Math.floor((now - d) / 86400000);
+    if (days < 1)   return 'today';
+    if (days < 7)   return days + 'd ago';
+    if (days < 30)  return Math.floor(days/7) + 'w ago';
+    if (days < 365) return Math.floor(days/30) + 'mo ago';
+    return Math.floor(days/365) + 'y ago';
+  }
+
+  function escapeHTML(s){
+    return String(s||'').replace(/[&<>"']/g, c =>
+      ({'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));
+  }
+
+  function cardHTML(repo, i){
+    const desc = repo.description
+      ? '<p class="proj-desc">' + escapeHTML(repo.description) + '</p>'
+      : '<p class="proj-desc proj-desc-empty">No description — explore the code.</p>';
+    const topics = (repo.topics && repo.topics.length)
+      ? '<div class="proj-topics">' + repo.topics.slice(0,5)
+          .map(t=>'<span class="tp">'+escapeHTML(t)+'</span>').join('') + '</div>'
+      : '';
+    const lang = repo.language
+      ? '<span class="lang"><span class="lang-dot" style="background:'+langColor(repo.language)+'"></span>'+escapeHTML(repo.language)+'</span>'
+      : '';
+    const stars = repo.stargazers_count > 0
+      ? '<span class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'+repo.stargazers_count+'</span>'
+      : '';
+    const forks = repo.forks_count > 0 ? '<span class="forks">⑂ '+repo.forks_count+'</span>' : '';
+    const live = repo.homepage
+      ? ' <a class="proj-card-link" href="'+escapeHTML(repo.homepage)+'" target="_blank" rel="noopener">Live <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a>'
+      : '';
+    const num = String(i+1).padStart(2,'0');
+    return ''+
+    '<article class="proj reveal">'+
+      '<div class="proj-num">— '+num+'</div>'+
+      '<div class="proj-head">'+
+        '<h3><em>'+escapeHTML(repo.name)+'</em></h3>'+
+        '<div class="proj-stack"><span class="lbl">Stack —</span> '+(repo.language||'Mixed')+(repo.topics&&repo.topics.length?' · '+repo.topics.slice(0,3).join(' · '):'')+'</div>'+
+      '</div>'+
+      '<div>'+
+        desc+
+        '<div class="proj-meta">'+lang+stars+forks+
+          '<span class="updated">Updated '+timeAgo(repo.updated_at)+'</span>'+
+        '</div>'+
+        topics+
+        '<div class="proj-links">'+
+          '<a class="proj-card-link" href="'+escapeHTML(repo.html_url)+'" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a>'+
+          live+
+        '</div>'+
+      '</div>'+
+    '</article>';
+  }
+
+  function render(repos){
+    if (!repos || !repos.length){
+      $list.innerHTML = '<div class="proj-error">No public repositories found. Visit <a href="https://github.com/'+GH_USER+'" target="_blank" rel="noopener">github.com/'+GH_USER+'</a> to see my work.</div>';
+      return;
+    }
+    $list.innerHTML = repos.map(cardHTML).join('');
+    if ($count){
+      $count.textContent = repos.length + ' public repo' + (repos.length>1?'s':'') + ' · sorted by recent activity';
+      $count.hidden = false;
+    }
+    // re-observe the new .reveal cards
+    $list.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  }
+
+  async function fetchRepos(){
+    // 1. cache check
+    try{
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (raw){
+        const c = JSON.parse(raw);
+        if (Date.now() - c.t < CACHE_TTL){ render(c.r); return; }
+      }
+    }catch(e){}
+
+    // 2. fetch from GitHub (100 per page, pushed-desc = recently active first)
+    const url = 'https://api.github.com/users/'+GH_USER+'/repos?per_page=100&sort=pushed';
+    const res = await fetch(url, {headers:{'Accept':'application/vnd.github+json'}});
+    if (!res.ok){
+      if (res.status === 403){
+        throw new Error('rate');  // API rate limit hit
+      }
+      throw new Error('fetch');
+    }
+    let repos = await res.json();
+
+    // 3. filter: exclude forks + the portfolio repo itself
+    repos = repos.filter(r => !r.fork && r.name.toLowerCase() !== SELF_REPO.toLowerCase());
+
+    // 4. sort by last pushed (most recent first)
+    repos.sort((a,b)=> new Date(b.pushed_at) - new Date(a.pushed_at));
+
+    // 5. cache
+    try{ localStorage.setItem(CACHE_KEY, JSON.stringify({t:Date.now(), r:repos})); }catch(e){}
+
+    render(repos);
+  }
+
+  fetchRepos().catch(err=>{
+    // try stale cache as fallback
+    try{
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (raw){ const c = JSON.parse(raw); if (c.r && c.r.length){ render(c.r); return; } }
+    }catch(e){}
+    const msg = err.message === 'rate'
+      ? 'GitHub API rate limit reached — too many visitors right now. View my projects directly at <a href="https://github.com/'+GH_USER+'" target="_blank" rel="noopener">github.com/'+GH_USER+'</a>.'
+      : 'Couldn\'t load projects right now. View them at <a href="https://github.com/'+GH_USER+'" target="_blank" rel="noopener">github.com/'+GH_USER+'</a>.';
+    $list.innerHTML = '<div class="proj-error">'+msg+'</div>';
+    if ($count){ $count.hidden = true; }
+  });
+})();
 </script>
 </body>
 </html>
