@@ -636,6 +636,10 @@ footer{border-top:1px solid var(--line);padding:36px}
 </div>
 
 <script>
+// Force scroll to top on refresh — prevent browser scroll restoration
+history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const io = new IntersectionObserver((entries)=>{
