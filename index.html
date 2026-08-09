@@ -1,1 +1,754 @@
-PHIgY2xhc3M9InNfdGl0bGUiPjk8L3A
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ketan Joshi — Backend & Full-Stack Engineer</title>
+<meta name="description" content="Ketan Joshi — backend-focused full-stack developer building production systems with Python, FastAPI, React, Node.js and PostgreSQL. Based in Mehsana, Gujarat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f3efe6'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-style='italic' fill='%231b1814' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3efe6;
+  --bg-2:#ece7db;
+  --ink:#1b1814;
+  --ink-2:#3a352d;
+  --dim:#6b6457;
+  --mute:#8f8775;
+  --line:rgba(27,24,20,0.14);
+  --line-soft:rgba(27,24,20,0.08);
+  --accent:#9c4221;
+  --accent-2:#b45309;
+  --accent-soft:rgba(156,66,33,0.08);
+  --surface:#faf7f0;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --maxw:1240px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+/* faint paper grain */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity:0.025;
+}
+.wrap{position:relative;z-index:1}
+a{color:inherit;text-decoration:none}
+svg{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:currentColor;stroke:none}
+::selection{background:var(--accent);color:var(--bg)}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  backdrop-filter:blur(14px) saturate(1.2);
+  background:rgba(243,239,230,0.78);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav-inner{
+  max-width:var(--maxw);margin:0 auto;
+  padding:18px 36px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:12px;font-weight:500}
+.monogram{
+  width:30px;height:30px;border:1px solid var(--ink);
+  display:grid;place-items:center;
+  font-family:var(--serif);font-size:16px;font-style:italic;
+  letter-spacing:-0.02em;
+}
+.brand-name{font-size:14px;letter-spacing:-0.01em}
+.brand-name b{font-weight:600}
+.brand-name span{color:var(--dim);font-weight:400}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-size:13px;color:var(--dim);letter-spacing:0.01em;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  font-size:13px;padding:9px 18px;
+  border:1px solid var(--ink);border-radius:100px;
+  color:var(--ink)!important;font-weight:500;
+  transition:background .2s,color .2s;
+}
+.nav-cta:hover{background:var(--ink);color:var(--bg)!important}
+.nav-social{display:flex;gap:4px;align-items:center}
+.nav-social a{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:var(--dim);transition:color .2s,background .2s}
+.nav-social a:hover{color:var(--ink);background:var(--surface)}
+.nav-social svg{width:17px;height:17px}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:6px}
+@media(max-width:860px){
+  .nav-inner{padding:16px 22px}
+  .nav-links{
+    display:none;flex-direction:column;align-items:stretch;gap:0;
+    position:absolute;top:100%;left:0;right:0;
+    background:var(--bg);border-bottom:1px solid var(--line);
+    padding:10px 22px 20px;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:15px}
+  .nav-cta{margin-top:14px;text-align:center;border-color:var(--ink)}
+  .nav-social{margin-top:14px;justify-content:center}
+  .menu-btn{display:block}
+}
+
+/* ===== HERO ===== */
+.hero{padding:96px 36px 40px}
+.hero-inner{max-width:var(--maxw);margin:0 auto}
+.hero-grid{
+  display:grid;grid-template-columns:1.55fr 1fr;gap:80px;align-items:end;
+}
+@media(max-width:980px){.hero-grid{grid-template-columns:1fr;gap:48px}}
+.eyebrow{
+  display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);font-size:11.5px;
+  color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:36px;
+}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--accent)}
+.hero h1{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(46px,8.2vw,108px);
+  line-height:0.94;letter-spacing:-0.035em;
+  margin-bottom:40px;
+  font-variation-settings:"opsz" 144;
+}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--accent)}
+.hero-lead{
+  font-size:clamp(16px,1.5vw,18.5px);
+  color:var(--ink-2);max-width:540px;line-height:1.65;margin-bottom:40px;
+}
+.hero-lead b{font-weight:600}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:500;
+  padding:13px 22px;border-radius:100px;
+  transition:transform .25s,background .2s,color .2s,border-color .2s;
+  cursor:pointer;
+}
+.btn svg{width:15px;height:15px;transition:transform .25s}
+.btn-primary{background:var(--ink);color:var(--bg);border:1px solid var(--ink)}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent)}
+.btn-primary:hover svg{transform:translate(3px,-3px)}
+.btn-line{border:1px solid var(--line);color:var(--ink);background:transparent}
+.btn-line:hover{border-color:var(--ink);background:var(--surface)}
+
+/* hero meta sidebar */
+.hero-meta{
+  border-left:1px solid var(--line);
+  padding-left:32px;
+  display:flex;flex-direction:column;gap:28px;
+}
+.meta-row .meta-k{
+  font-family:var(--mono);font-size:10.5px;
+  text-transform:uppercase;letter-spacing:0.14em;
+  color:var(--mute);margin-bottom:6px;
+}
+.meta-row .meta-v{font-size:15px;color:var(--ink);font-weight:500}
+.meta-row .meta-v a{border-bottom:1px solid var(--line);transition:border-color .2s,color .2s}
+.meta-row .meta-v a:hover{color:var(--accent);border-color:var(--accent)}
+.status-dot{
+  display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:#16a34a;margin-right:8px;vertical-align:middle;
+  box-shadow:0 0 0 3px rgba(22,163,74,0.15);
+}
+@media(max-width:980px){.hero-meta{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:32px}}
+
+/* ===== SECTION ===== */
+section{padding:70px 36px;position:relative}
+.section-inner{max-width:var(--maxw);margin:0 auto}
+.s-head{
+  display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:baseline;
+  margin-bottom:40px;border-bottom:1px solid var(--line);padding-bottom:20px;
+}
+@media(max-width:760px){.s-head{grid-template-columns:1fr;gap:12px}}
+.s-num{
+  font-family:var(--mono);font-size:12px;color:var(--accent);
+  letter-spacing:0.1em;
+}
+.s-title{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(30px,4.4vw,48px);
+  line-height:1.02;letter-spacing:-0.025em;
+}
+.s-title em{font-style:italic;color:var(--dim)}
+.s-mark{font-family:var(--mono);font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:0.12em}
+
+/* ===== ABOUT ===== */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+@media(max-width:880px){.about-grid{grid-template-columns:1fr;gap:48px}}
+.about-text p{font-size:17px;color:var(--ink-2);margin-bottom:22px;line-height:1.72}
+.about-text p:last-child{margin-bottom:0}
+.about-text b{color:var(--ink);font-weight:600}
+.about-text .hl{color:var(--accent);font-weight:500;font-style:italic;font-family:var(--serif);font-size:18px}
+.pullquote{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(22px,2.4vw,28px);line-height:1.35;
+  color:var(--ink);padding:8px 0 8px 28px;
+  border-left:2px solid var(--accent);
+  margin:8px 0 4px;
+}
+.facts{display:flex;flex-direction:column;gap:0}
+.fact{
+  display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;
+  padding:18px 0;border-bottom:1px solid var(--line-soft);
+}
+.fact:last-child{border-bottom:none}
+.fact-k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--mute)}
+.fact-v{font-size:15px;color:var(--ink);font-weight:500}
+.fact-v span{color:var(--dim);font-weight:400}
+
+/* ===== SKILLS — editorial index ===== */
+.skill-index{display:grid;grid-template-columns:220px 1fr;gap:0}
+@media(max-width:760px){.skill-index{grid-template-columns:1fr;gap:8px}}
+.skill-row{
+  display:contents;
+}
+.skill-cat{
+  padding:26px 0;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:12px;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--accent);
+}
+.skill-items{
+  padding:26px 0 26px 32px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;
+}
+@media(max-width:760px){
+  .skill-cat{border-top:1px solid var(--line);padding:18px 0 4px}
+  .skill-items{padding:6px 0 18px;border-top:none}
+}
+.skill-items .tag{
+  font-size:16px;color:var(--ink-2);font-weight:500;
+  transition:color .2s;
+}
+.skill-items .tag:hover{color:var(--accent)}
+.skill-items .sep{color:var(--mute);opacity:0.5}
+.skill-row:last-child .skill-cat,
+.skill-row:last-child .skill-items{border-bottom:1px solid var(--line)}
+
+/* ===== EXPERIENCE ===== */
+.exp-wrap{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
+@media(max-width:880px){.exp-wrap{grid-template-columns:1fr;gap:24px}}
+.exp-aside{position:static}
+.exp-aside .tag{
+  display:inline-block;font-family:var(--mono);font-size:11px;
+  text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);
+  padding:5px 12px;border:1px solid var(--accent);border-radius:100px;
+  margin-bottom:20px;
+}
+.exp-aside h3{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.2;margin-bottom:10px}
+.exp-aside .date{font-family:var(--mono);font-size:12px;color:var(--mute);letter-spacing:0.05em}
+.exp-body p{font-size:17px;color:var(--ink-2);margin-bottom:20px;line-height:1.72}
+.exp-body p:last-of-type{margin-bottom:0}
+.exp-body b{color:var(--ink);font-weight:600}
+.exp-stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line-soft)}
+.exp-stack .t{font-family:var(--mono);font-size:12px;padding:5px 11px;background:var(--surface);border:1px solid var(--line);border-radius:6px;color:var(--ink-2)}
+.exp-link{
+  display:inline-flex;align-items:center;gap:7px;margin-top:24px;
+  font-family:var(--mono);font-size:13px;color:var(--accent);
+  border-bottom:1px solid var(--accent);padding-bottom:2px;
+}
+.exp-link svg{width:13px;height:13px}
+
+/* ===== PROJECTS ===== */
+.proj-list{display:flex;flex-direction:column;gap:0}
+.proj{
+  display:grid;grid-template-columns:80px 1fr 1fr;gap:48px;
+  padding:40px 0;border-top:1px solid var(--line);
+  align-items:start;
+}
+.proj:last-child{border-bottom:1px solid var(--line)}
+@media(max-width:860px){.proj{grid-template-columns:1fr;gap:20px;padding:32px 0}}
+.proj-num{font-family:var(--mono);font-size:13px;color:var(--mute);letter-spacing:0.05em}
+.proj-head h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.4vw,40px);line-height:1.05;letter-spacing:-0.02em;margin-bottom:14px}
+.proj-head h3 em{font-style:italic;color:var(--accent)}
+.proj-stack{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-bottom:24px;line-height:1.7}
+.proj-stack .lbl{color:var(--mute)}
+.proj-desc{font-size:16px;color:var(--ink-2);line-height:1.7;margin-bottom:22px}
+.proj-points{list-style:none;margin-bottom:26px}
+.proj-points li{
+  position:relative;padding-left:22px;font-size:14.5px;color:var(--dim);
+  margin-bottom:12px;line-height:1.6;
+}
+.proj-points li::before{
+  content:'';position:absolute;left:0;top:10px;width:10px;height:1px;background:var(--accent);
+}
+.proj-points b{color:var(--ink);font-weight:600}
+.proj-links{display:flex;gap:24px;flex-wrap:wrap}
+.proj-links a{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:12.5px;color:var(--ink);
+  border-bottom:1px solid var(--line);padding-bottom:3px;
+  transition:color .2s,border-color .2s;
+}
+.proj-links a:hover{color:var(--accent);border-color:var(--accent)}
+.proj-links a svg{width:13px;height:13px}
+
+/* ===== EDUCATION ===== */
+.edu-list{display:flex;flex-direction:column}
+.edu{
+  display:grid;grid-template-columns:120px 1fr 1fr 1fr;gap:32px;align-items:baseline;
+  padding:22px 0;border-top:1px solid var(--line);
+}
+.edu:last-child{border-bottom:1px solid var(--line)}
+@media(max-width:760px){.edu{grid-template-columns:1fr;gap:8px;padding:18px 0}}
+.edu-year{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.edu-deg{font-family:var(--serif);font-size:22px;font-weight:400;line-height:1.2}
+.edu-org{font-size:14px;color:var(--dim)}
+.edu-meta{font-family:var(--mono);font-size:12.5px;color:var(--mute)}
+.edu-meta b{color:var(--ink);font-weight:500}
+
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--line);padding:36px}
+.footer-inner{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-family:var(--mono);font-size:11.5px;color:var(--mute);letter-spacing:0.06em;text-transform:uppercase}
+.footer-inner a{color:var(--ink-2);transition:color .2s}
+.footer-inner a:hover{color:var(--accent)}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *{scroll-behavior:auto}
+}
+
+/* ===== DYNAMIC PROJECT CARDS ===== */
+.proj-meta{
+  display:flex;flex-wrap:wrap;gap:0 20px;align-items:center;
+  margin-bottom:16px;font-family:var(--mono);font-size:12px;
+  color:var(--mute);letter-spacing:0.02em;
+}
+.proj-meta .lang-dot{
+  display:inline-block;width:9px;height:9px;border-radius:50%;
+  margin-right:7px;vertical-align:middle;background:var(--mute);
+}
+.proj-meta .stars{display:inline-flex;align-items:center;gap:5px}
+.proj-meta .stars svg{width:13px;height:13px;stroke:var(--accent-2);fill:var(--accent-2);stroke-width:1}
+.proj-meta .updated{margin-left:auto;color:var(--mute)}
+.proj-topics{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.proj-topics .tp{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:0.04em;
+  padding:3px 9px;border-radius:100px;background:var(--accent-soft);
+  color:var(--accent);text-transform:lowercase;
+}
+.proj-card-link{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:12.5px;color:var(--ink);
+  border-bottom:1px solid var(--line);padding-bottom:3px;
+  transition:color .2s,border-color .2s;
+}
+.proj-card-link:hover{color:var(--accent);border-color:var(--accent)}
+.proj-card-link svg{width:13px;height:13px}
+.proj-desc-empty{font-size:15px;color:var(--mute);font-style:italic;font-family:var(--serif)}
+
+/* loading skeleton */
+.proj-loading{
+  padding:48px 0;text-align:center;
+  font-family:var(--mono);font-size:12px;color:var(--mute);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+.proj-loading::after{
+  content:'';display:inline-block;width:10px;height:10px;
+  margin-left:10px;border:1px solid var(--mute);border-top-color:transparent;
+  border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.proj-error{
+  padding:48px 0;text-align:center;
+  font-size:15px;color:var(--dim);font-family:var(--serif);font-style:italic;
+}
+.proj-error a{color:var(--accent);border-bottom:1px solid var(--accent)}
+.proj-count{
+  font-family:var(--mono);font-size:11px;color:var(--mute);
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:40px;padding-bottom:18px;border-bottom:1px solid var(--line-soft);
+}
+@media(max-width:860px){
+  .proj-meta .updated{margin-left:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <div class="monogram">K</div>
+      <div class="brand-name"><b>Ketan Joshi</b> <span>· Engineer</span></div>
+    </a>
+    <button class="menu-btn" onclick="document.getElementById('navlinks').classList.toggle('open')" aria-label="Toggle menu">
+      <svg width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="nav-links" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#education">Education</a>
+      <div class="nav-social">
+        <a href="mailto:ketanjoshi2003@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a href="https://github.com/ketanjoshi2003" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" class="fill"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33s1.7.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg></a>
+        <a href="https://linkedin.com/in/ketan-joshi-223r" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" class="fill"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow reveal">Backend & Full-Stack Engineer</div>
+    <div class="hero-grid">
+      <div>
+        <h1 class="reveal">Ketan<br>Joshi<span>.</span><br><em>Builds systems</em><br>that ship.</h1>
+        <p class="hero-lead reveal">
+          Backend-focused full-stack developer shipping production systems across <b>Python / FastAPI, React, Node.js and PostgreSQL</b> — from multi-model LLM orchestration platforms to secure REST APIs and OCR-based document systems. Based in Mehsana, Gujarat.
+        </p>
+        <div class="hero-actions reveal">
+          <a href="#work" class="btn btn-primary">
+            View selected work
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="mailto:ketanjoshi2003@gmail.com" class="btn btn-line">Get in touch</a>
+        </div>
+      </div>
+      <aside class="hero-meta reveal">
+        <div class="meta-row">
+          <div class="meta-k">Status</div>
+          <div class="meta-v"><span class="status-dot"></span>Open to backend / full-stack roles</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-k">Based in</div>
+          <div class="meta-v">Mehsana, Gujarat · IN</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-k">Education</div>
+          <div class="meta-v">MCA · Ganpat University · 8.26</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-k">Contact</div>
+          <div class="meta-v"><a href="mailto:ketanjoshi2003@gmail.com">ketanjoshi2003@gmail.com</a></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="s-head reveal">
+      <div class="s-num">01 /</div>
+      <h2 class="s-title">A developer who owns <em>end-to-end delivery.</em></h2>
+      <div class="s-mark">About</div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a backend-focused full-stack developer who cares less about hype and more about systems that hold up in production — <b>secure, observable, and genuinely shipped</b>. My work spans multi-model <span class="hl">LLM orchestration</span>, REST APIs with JWT auth and RBAC, and OCR-based document platforms.</p>
+        <p>What sets me apart is ownership. At the COMS2 conference rebuild I took the project from requirements through deployment without disrupting a live recurring event — delivered in MERN, then ported the backend to PHP to meet institutional hosting constraints, eliminating SQL-injection risk with PDO prepared statements. It now serves <b>29,000+ visitors</b>.</p>
+        <div class="pullquote">The details make production real: rate limiting, security headers, isolated API keys, provider fallback.</div>
+      </div>
+      <div class="facts reveal">
+        <div class="fact"><div class="fact-k">Focus</div><div class="fact-v">Backend & Full-Stack</div></div>
+        <div class="fact"><div class="fact-k">Core</div><div class="fact-v">Python · React · Node.js <span>· 7 languages</span></div></div>
+        <div class="fact"><div class="fact-k">Education</div><div class="fact-v">MCA, Ganpat University <span>· 8.26 CGPA</span></div></div>
+        <div class="fact"><div class="fact-k">Location</div><div class="fact-v">Mehsana, Gujarat</div></div>
+        <div class="fact"><div class="fact-k">Availability</div><div class="fact-v">Junior roles · Immediate</div></div>
+        <div class="fact"><div class="fact-k">GitHub</div><div class="fact-v"><a href="https://github.com/ketanjoshi2003" target="_blank" rel="noopener">@ketanjoshi2003</a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="s-head reveal">
+      <div class="s-num">02 /</div>
+      <h2 class="s-title">The <em>toolkit.</em></h2>
+      <div class="s-mark">Capabilities</div>
+    </div>
+    <div class="skill-index">
+      <div class="skill-row">
+        <div class="skill-cat">Languages</div>
+        <div class="skill-items">
+          <span class="tag">Python</span><span class="sep">·</span>
+          <span class="tag">JavaScript</span><span class="sep">·</span>
+          <span class="tag">TypeScript</span><span class="sep">·</span>
+          <span class="tag">SQL</span><span class="sep">·</span>
+          <span class="tag">PHP</span><span class="sep">·</span>
+          <span class="tag">HTML</span><span class="sep">·</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Frameworks</div>
+        <div class="skill-items">
+          <span class="tag">React 19</span><span class="sep">·</span>
+          <span class="tag">Node.js</span><span class="sep">·</span>
+          <span class="tag">Express</span><span class="sep">·</span>
+          <span class="tag">FastAPI</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Databases</div>
+        <div class="skill-items">
+          <span class="tag">PostgreSQL</span><span class="sep">·</span>
+          <span class="tag">MongoDB</span><span class="sep">·</span>
+          <span class="tag">SQLite</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Tools & Infra</div>
+        <div class="skill-items">
+          <span class="tag">Git</span><span class="sep">·</span>
+          <span class="tag">GitHub</span><span class="sep">·</span>
+          <span class="tag">Docker</span><span class="sep">·</span>
+          <span class="tag">Vercel</span><span class="sep">·</span>
+          <span class="tag">Render</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="s-head reveal">
+      <div class="s-num">03 /</div>
+      <h2 class="s-title">Shipped, not just <em>studied.</em></h2>
+      <div class="s-mark">Experience</div>
+    </div>
+    <div class="exp-wrap">
+      <aside class="exp-aside reveal">
+        <span class="tag">Freelance · 2026</span>
+        <h3>Web Developer<br>COMS2 Conference</h3>
+        <div class="date">Apr — May 2026 · Ganpat University</div>
+      </aside>
+      <div class="exp-body reveal">
+        <p>Rebuilt the university's outdated, SQL-injection-vulnerable WordPress conference site into a secure, responsive platform now serving <b>29,000+ visitors</b> — eliminating injection risk end-to-end using PDO prepared statements across all database queries.</p>
+        <p>Owned the project end to end, requirements through deployment, without disrupting a live recurring event. Delivered initially in MERN, then ported the backend to <b>PHP</b> to meet institutional hosting constraints — a pragmatic call to ship under real constraints.</p>
+        <div class="exp-stack">
+          <span class="t">React</span><span class="t">Express</span><span class="t">MongoDB</span><span class="t">PHP</span><span class="t">PDO</span><span class="t">Security</span>
+        </div>
+        <a href="https://coms2.gnu.ac.in" target="_blank" rel="noopener" class="exp-link">
+          coms2.gnu.ac.in
+          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS / WORK (dynamic) -->
+<section id="work">
+  <div class="section-inner">
+    <div class="s-head reveal">
+      <div class="s-num">04 /</div>
+      <h2 class="s-title">Selected <em>work.</em></h2>
+      <div class="s-mark">Projects</div>
+    </div>
+    <div id="proj-count" class="proj-count reveal" hidden></div>
+    <div id="proj-list" class="proj-list">
+      <div class="proj-loading" id="proj-loading">Fetching from GitHub</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="s-head reveal">
+      <div class="s-num">05 /</div>
+      <h2 class="s-title">Academic <em>foundation.</em></h2>
+      <div class="s-mark">Education</div>
+    </div>
+    <div class="edu-list">
+      <div class="edu reveal">
+        <div class="edu-year">2026</div>
+        <div class="edu-deg">Master of Computer Applications</div>
+        <div class="edu-org">Ganpat University, Kherva</div>
+        <div class="edu-meta">CGPA <b>8.26</b></div>
+      </div>
+      <div class="edu reveal">
+        <div class="edu-year">2024</div>
+        <div class="edu-deg">Bachelor of Computer Applications</div>
+        <div class="edu-org">Ganpat University, Kherva</div>
+        <div class="edu-meta">Completed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>© <span id="year"></span> Ketan Joshi · Mehsana, Gujarat</div>
+    <div><a href="#top">Back to top ↑</a></div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+// Force scroll to top on refresh — prevent browser scroll restoration
+history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+},{threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open'));
+});
+
+/* ===== DYNAMIC GITHUB PROJECTS ===== */
+(function(){
+  const GH_USER = 'ketanjoshi2003';
+  const SELF_REPO = 'ketan-portfolio';
+  const CACHE_KEY = 'gh_repos_v3';
+  const CACHE_TTL = 1000 * 60 * 60;
+  const LANG_COLORS = {
+    Python:'#3572A5',JavaScript:'#f1e05a',TypeScript:'#3178c6',
+    PHP:'#4F5D95',HTML:'#e34c26',CSS:'#563d7c',Java:'#b07219',
+    C:'#555555','C++':'f34b7d',Go:'#00ADD8',Rust:'#dea584',
+    Shell:'#89e051',Vue:'#41b883',Dart:'#00B4AB',Kotlin:'#A97BFF',
+    Ruby:'#701516',Jupyter:'#DA5B0B'
+  };
+  const $list   = document.getElementById('proj-list');
+  const $count  = document.getElementById('proj-count');
+
+  function langColor(l){ return LANG_COLORS[l] || '#8f8775'; }
+
+  function timeAgo(iso){
+    const d = new Date(iso); const now = new Date();
+    const days = Math.floor((now - d) / 86400000);
+    if (days < 1)   return 'today';
+    if (days < 7)   return days + 'd ago';
+    if (days < 30)  return Math.floor(days/7) + 'w ago';
+    if (days < 365) return Math.floor(days/30) + 'mo ago';
+    return Math.floor(days/365) + 'y ago';
+  }
+
+  function escapeHTML(s){
+    return String(s||'').replace(/[&<>"']/g, c =>
+      ({'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));
+  }
+
+  function cardHTML(repo, i){
+    const desc = repo.description
+      ? '<p class="proj-desc">' + escapeHTML(repo.description) + '</p>'
+      : '<p class="proj-desc proj-desc-empty">No description — explore the code.</p>';
+    const topics = (repo.topics && repo.topics.length)
+      ? '<div class="proj-topics">' + repo.topics.slice(0,5)
+          .map(t=>'<span class="tp">'+escapeHTML(t)+'</span>').join('') + '</div>'
+      : '';
+    const lang = repo.language
+      ? '<span class="lang"><span class="lang-dot" style="background:'+langColor(repo.language)+'"></span>'+escapeHTML(repo.language)+'</span>'
+      : '';
+    const stars = repo.stargazers_count > 0
+      ? '<span class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'+repo.stargazers_count+'</span>'
+      : '';
+    const forks = repo.forks_count > 0 ? '<span class="forks">⑂ '+repo.forks_count+'</span>' : '';
+    const live = repo.homepage
+      ? ' <a class="proj-card-link" href="'+escapeHTML(repo.homepage)+'" target="_blank" rel="noopener">Live <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a>'
+      : '';
+    const num = String(i+1).padStart(2,'0');
+    return ''+
+    '<article class="proj reveal">'+
+      '<div class="proj-num">— '+num+'</div>'+
+      '<div class="proj-head">'+
+        '<h3><em>'+escapeHTML(repo.name)+'</em></h3>'+
+        '<div class="proj-stack"><span class="lbl">Stack —</span> '+(repo.language||'Mixed')+(repo.topics&&repo.topics.length?' · '+repo.topics.slice(0,3).join(' · '):'')+'</div>'+
+      '</div>'+
+      '<div>'+
+        desc+
+        '<div class="proj-meta">'+lang+stars+forks+
+          '<span class="updated">Updated '+timeAgo(repo.updated_at)+'</span>'+
+        '</div>'+
+        topics+
+        '<div class="proj-links">'+
+          '<a class="proj-card-link" href="'+escapeHTML(repo.html_url)+'" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></a>'+
+          live+
+        '</div>'+
+      '</div>'+
+    '</article>';
+  }
+
+  function render(repos){
+    if (!repos || !repos.length){
+      $list.innerHTML = '<div class="proj-error">No public repositories found. Visit <a href="https://github.com/'+GH_USER+'" target="_blank" rel="noopener">github.com/'+GH_USER+'</a> to see my work.</div>';
+      return;
+    }
+    $list.innerHTML = repos.map(cardHTML).join('');
+    if ($count){
+      $count.textContent = repos.length + ' public repo' + (repos.length>1?'s':'') + ' · sorted by recent activity';
+      $count.hidden = false;
+    }
+    $list.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  }
+
+  async function fetchRepos(){
+    try{
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (raw){
+        const c = JSON.parse(raw);
+        if (Date.now() - c.t < CACHE_TTL){ render(c.r); return; }
+      }
+    }catch(e){}
+
+    const url = 'https://api.github.com/users/'+GH_USER+'/repos?per_page=100&sort=pushed';
+    const res = await fetch(url, {headers:{'Accept':'application/vnd.github+json'}});
+    if (!res.ok){
+      if (res.status === 403){
+        throw new Error('rate');
+      }
+      throw new Error('fetch');
+    }
+    let repos = await res.json();
+
+    repos = repos.filter(r => !r.fork && r.name.toLowerCase() !== SELF_REPO.toLowerCase());
+    repos.sort((a,b)=> new Date(b.pushed_at) - new Date(a.pushed_at));
+
+    try{ localStorage.setItem(CACHE_KEY, JSON.stringify({t:Date.now(), r:repos})); }catch(e){}
+
+    render(repos);
+  }
+
+  fetchRepos().catch(err=>{
+    try{
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (raw){ const c = JSON.parse(raw); if (c.r && c.r.length){ render(c.r); return; } }
+    }catch(e){}
+    const msg = err.message === 'rate'
+      ? 'GitHub API rate limit reached — too many visitors right now. View my projects directly at <a href="https://github.com/'+GH_USER+'" target="_blank" rel="noopener">github.com/'+GH_USER+'</a>.'
+      : 'Couldn\'t load projects right now. View them at <a href="https://github.com/'+GH_USER+'" target="_blank" rel="noopener">github.com/'+GH_USER+'</a>.';
+    $list.innerHTML = '<div class="proj-error">'+msg+'</div>';
+    if ($count){ $count.hidden = true; }
+  });
+})();
+</script>
+</body>
+</html>
